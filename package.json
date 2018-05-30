@@ -1,0 +1,17 @@
+{
+  "name": "xtal-pika-day",
+  "description": "Vanilla web component wrapper around pikaday date picker ",
+  "main": "xtal-pika-day.js",
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0"
+  },
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "wct-browser-legacy": "^1.0.0"
+  },
+  "version": "0.0.0",
+  "repository": "https://github.com/bahrus/xtal-pika-day",
+  "author": "bahrus <anderson.bruce.b@gmail.com>",
+  "license": "MIT"
+}
