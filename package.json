@@ -3,7 +3,8 @@
   "description": "Vanilla web component wrapper around pikaday date picker ",
   "main": "xtal-pika-day.js",
   "dependencies": {
-    "@polymer/polymer": "^3.0.0"
+    "@polymer/polymer": "^3.0.0",
+    "pikaday": "^1.7.0"
   },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
