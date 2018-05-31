@@ -1264,7 +1264,12 @@
             super();
         }
         connectedCallback() {
-            this.innerHTML = `<input type="text" id="datepicker">`;
+            const val = this.getAttribute('value');
+            let valAttr = '';
+            if(val){
+                valAttr = `value=${val}`;
+            }
+            this.innerHTML = `<input type="text" id="datepicker" ${valAttr}>`;
             this.config = {};
         }
         get config() {
