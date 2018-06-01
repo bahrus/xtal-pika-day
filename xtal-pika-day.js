@@ -1251,12 +1251,15 @@
 
 //@ts-check
 (function () {
-    const cs_src = self['xtal_pika_day'] ? xtal_pika_day.href : document.currentScript.src;
-    const base = cs_src.split('/').slice(0, -1).join('/');
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = base + '/pikaday.css';
-    document.head.appendChild(link);
+    if(!self['xtal_pika_day_css']){
+        const cs_src = self['xtal_pika_day'] ? xtal_pika_day.href : document.currentScript.src;
+        const base = cs_src.split('/').slice(0, -1).join('/');
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = base + '/pikaday.css';
+        document.head.appendChild(link);
+    }
+    
    
     class XtalPikaDay extends HTMLElement {
         static get is() { return 'xtal-pika-day'; }
@@ -1269,7 +1272,7 @@
             if(val){
                 valAttr = `value=${val}`;
             }
-            this.innerHTML = `<input type="text" id="datepicker" ${valAttr}>`;
+            this.innerHTML = `<input type="text" class="datepicker" ${valAttr}>`;
             this.config = {};
         }
         get config() {
@@ -1277,7 +1280,7 @@
         }
         set config(val) {
             this._config = val;
-            this._config['field'] = this.querySelector('#datepicker');
+            this._config['field'] = this.querySelector('.datepicker');
             this.onPropsChange();
         }
         onPropsChange() {
