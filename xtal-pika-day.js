@@ -1260,7 +1260,14 @@
         document.head.appendChild(link);
     }
     
-   
+   /**
+   * `xtal-pika-day`
+   *  Combine passed-in JSON with JSON defined within script tag
+   *
+   * @customElement
+   * @polymer
+   * @demo demo/index.html
+   */
     class XtalPikaDay extends HTMLElement {
         static get is() { return 'xtal-pika-day'; }
         constructor() {
