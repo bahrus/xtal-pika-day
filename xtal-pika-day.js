@@ -1272,6 +1272,7 @@
         static get is() { return 'xtal-pika-day'; }
         constructor() {
             super();
+            
         }
         connectedCallback() {
             const val = this.getAttribute('value');
@@ -1282,6 +1283,12 @@
             this.innerHTML = `<input type="text" class="datepicker" ${valAttr}>`;
             this.config = {};
         }
+        // handleChange(){
+
+        // }
+        // disconnectedCallback(){
+
+        // }
         get config() {
             return this._config;
         }
