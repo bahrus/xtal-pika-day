@@ -790,8 +790,11 @@
         {
             if (!date) {
                 this._d = null;
-
-                if (this._o.field) {
+                const field = this._.field;
+                if (field) {
+                    if(typeof(field._changeCount) === 'undefined') field._changeCount = 0;
+                    field._changeCount++;
+                    field.valueAsDateExt = this._d;
                     this._o.field.value = '';
                     fireEvent(this._o.field, 'change', { firedBy: this });
                 }
