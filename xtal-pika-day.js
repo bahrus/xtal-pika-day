@@ -1277,21 +1277,38 @@
             super();
             
         }
+        handleButtonClick(e){
+            this._textBox.click();
+        }
+        
         connectedCallback() {
             const val = this.getAttribute('value');
             let valAttr = '';
             if(val){
                 valAttr = `value=${val}`;
             }
-            this.innerHTML = `<input type="text" class="datepicker" ${valAttr}>`;
+            const templ = self['xtal_pika_day_template'];
+            if(templ){
+                this.appendChild(templ.content.cloneNode(true));
+                this._textBox = this.querySelector('.datepicker');
+                this._textBox.value = valAttr;
+                this._button = this.querySelector('[role="button"]');
+                if(this._button){
+                    this._boundClickHandler = this.handleButtonClick.bind(this);
+                    this._button.addEventListener('click', this._boundClickHandler);
+                }
+                
+
+            }else{
+                this.innerHTML = `<input type="text" class="datepicker" ${valAttr}>`;
+            }
+            
             this.config = {};
         }
-        // handleChange(){
+        disconnectedCallback(){
+            if(this._button) this._button.removeEventListener('click', this._boundClickHandler);
+        }
 
-        // }
-        // disconnectedCallback(){
-
-        // }
         get config() {
             return this._config;
         }
