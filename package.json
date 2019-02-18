@@ -8,7 +8,7 @@
   "devDependencies": {
     "@webcomponents/webcomponentsjs": "2.2.7"
   },
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": "https://github.com/bahrus/xtal-pika-day",
   "author": "bahrus <anderson.bruce.b@gmail.com>",
   "license": "MIT"
