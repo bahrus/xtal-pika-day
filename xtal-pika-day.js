@@ -1,7 +1,7 @@
 /*!
  * Pikaday
  *
- * Copyright © 2014 David Bushell | BSD & MIT license | https://github.com/dbushell/Pikaday
+ * Copyright © 2014 David Bushell | BSD & MIT license | https://github.com/Pikaday/Pikaday
  */
 
 (function (root, factory)
@@ -182,6 +182,9 @@
 
         // automatically show/hide the picker on `field` focus (default `true` if `field` is set)
         bound: undefined,
+
+        // data-attribute on the input field with an aria assistance tekst (only applied when `bound` is set)
+        ariaLabel: 'Use the arrow keys to pick a date',
 
         // position of the datepicker, relative to the field (default to bottom & left)
         // ('bottom' & 'left' keywords are not used, 'top' & 'right' are modifier on the bottom/left position)
@@ -539,7 +542,6 @@
 
         self._onInputChange = function(e)
         {
-
             var date;
 
             if (e.firedBy === self) {
@@ -564,8 +566,6 @@
 
         self._onInputFocus = function()
         {
-            const dte = (new Date()).valueOf();
-            self._inputFocusStart = dte;
             self.show();
         };
 
@@ -595,8 +595,6 @@
 
         self._onClick = function(e)
         {
-            const dte = (new Date()).valueOf();
-            if(dte - self._inputFocusStart < 1000) return;
             e = e || window.event;
             var target = e.target || e.srcElement,
                 pEl = target;
@@ -790,11 +788,8 @@
         {
             if (!date) {
                 this._d = null;
-                const field = this._.field;
-                if (field) {
-                    if(typeof(field._changeCount) === 'undefined') field._changeCount = 0;
-                    field._changeCount++;
-                    field.valueAsDateExt = this._d;
+
+                if (this._o.field) {
                     this._o.field.value = '';
                     fireEvent(this._o.field, 'change', { firedBy: this });
                 }
@@ -1031,13 +1026,13 @@
 
             if (opts.bound) {
                 // let the screen reader user know to use arrow keys
-                opts.field.setAttribute('aria-label', 'Use the arrow keys to pick a date');
+                opts.field.setAttribute('aria-label', opts.ariaLabel);
             }
         },
 
         adjustPosition: function()
         {
-            var field, pEl, width, height, viewportWidth, viewportHeight, scrollTop, left, top, clientRect;
+            var field, pEl, width, height, viewportWidth, viewportHeight, scrollTop, left, top, clientRect, leftAligned, bottomAligned;
 
             if (this._o.container) return;
 
@@ -1050,6 +1045,8 @@
             viewportWidth = window.innerWidth || document.documentElement.clientWidth;
             viewportHeight = window.innerHeight || document.documentElement.clientHeight;
             scrollTop = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
+            leftAligned = true;
+            bottomAligned = true;
 
             if (typeof field.getBoundingClientRect === 'function') {
                 clientRect = field.getBoundingClientRect();
@@ -1072,6 +1069,7 @@
                 )
             ) {
                 left = left - width + field.offsetWidth;
+                leftAligned = false;
             }
             if ((this._o.reposition && top + height > viewportHeight + scrollTop) ||
                 (
@@ -1080,10 +1078,16 @@
                 )
             ) {
                 top = top - height - field.offsetHeight;
+                bottomAligned = false;
             }
 
             this.el.style.left = left + 'px';
             this.el.style.top = top + 'px';
+
+            addClass(this.el, leftAligned ? 'left-aligned' : 'right-aligned');
+            addClass(this.el, bottomAligned ? 'bottom-aligned' : 'top-aligned');
+            removeClass(this.el, !leftAligned ? 'left-aligned' : 'right-aligned');
+            removeClass(this.el, !bottomAligned ? 'bottom-aligned' : 'top-aligned');
         },
 
         /**
@@ -1251,6 +1255,7 @@
 
     return Pikaday;
 }));
+
 
 //@ts-check
 (function () {

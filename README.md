@@ -1,6 +1,11 @@
 # \<xtal-pika-day\>
 
-Vanilla web component wrapper around the lightweight [pikaday date picker](https://github.com/dbushell/Pikaday). 
+Vanilla web component wrapper around the lightweight [pikaday date picker](https://github.com/dbushell/Pikaday). If you need to:
+
+1.  Place a date picker in each row of a large grid, and
+2.  Have it load quickly in IE11
+
+this might be the best choice. 
 
 ## Install the Polymer-CLI
 
