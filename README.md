@@ -1,3 +1,7 @@
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/xtal-pika-day)
+
+<a href="https://nodei.co/npm/xtal-pika-day/"><img src="https://nodei.co/npm/xtal-pika-day.png"></a>
+
 # \<xtal-pika-day\>
 
 Vanilla web component wrapper around the lightweight [pikaday date picker](https://github.com/dbushell/Pikaday). If you need to:

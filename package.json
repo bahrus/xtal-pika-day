@@ -2,6 +2,7 @@
   "name": "xtal-pika-day",
   "description": "Web component wrapper around pikaday date picker ",
   "main": "xtal-pika-day.js",
+  "module": "xtal-pika-day.js",
   "dependencies": {
     "pikaday": "1.8.0"
   },
